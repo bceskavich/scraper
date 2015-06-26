@@ -4,8 +4,23 @@
   "description": "A simple app to scrape data from private Facebook pages.",
   "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "browserify src/app/app.js > src/build/bundle.js"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
   },
   "author": "Billy Ceskavich",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "flux": "^2.0.3",
+    "react": "^0.13.3",
+    "alt": "^0.16.10",
+    "express": "^4.13.0"
+  },
+  "devDependencies": {
+    "browserify": "^10.2.4",
+    "babelify": "^6.1.2"
+  }
 }
