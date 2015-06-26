@@ -1,24 +1,20 @@
 import $ from 'jQuery';
-import React, { Component } from 'react';
+import { Component } from 'react';
+import FSActions from '../actions/FSActions';
+
+const loginParams = {
+  clientId: 'TODO',
+  redirectUri: 'http://localhost:3000',
+  responseType: 'token',
+}
+const loginPath = 'https://www.facebook.com/dialog/oauth?client_id=' +
+      loginParams.clientId + '&redirect_uri=' + loginParams.redirectUri + '&response_type=' + loginParams.responseType;
 
 export default class LoginButton extends Component {
-  static propTypes = {
-    setToken: PropTypes.func.isRequired
-  };
-
-  constructor(props, context) {
-    super(props, context);
-
-    const clientId = 'TODO';
-    const redirectUri = 'http://localhost:3000';
-    const responseType = 'token';
-    this.requestPath = 'https://www.facebook.com/dialog/oauth?client_id=' +
-      clientId + '&redirect_uri=' + redirectUri + '&response_type=' + responseType;
-  }
 
   // TODO - parse and set token
 
   render() {
-    return <a href={this.requestPath}>Login w/ Facebook</a>;
+    return <a href={loginPath}>Login w/ Facebook</a>;
   }
 }

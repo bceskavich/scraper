@@ -22,7 +22,6 @@ export default class LoginPage extends Component {
     return (
       <div>
         {this.renderLogin()}
-        {this.renderScraper()}
       </div>
     );
   }
