@@ -1,48 +1,43 @@
 import * as $ from 'jQuery';
-import * as ActionTypes from '../constants/ActionTypes';
+import alt from '../alt';
+import FSStore from '../stores/FSStore';
 
-export function setToken(token) {
-  return {
-    type: ActionTypes.SET_TOKEN,
-    token: token
-  };
-}
+class FSActions {
+  setToken(token) {
+    return token;
+  }
 
-export function setTerm(term) {
-  return {
-    type: ActionTypes.SET_TERM,
-    term: term
-  };
-}
+  setTerm(term) {
+    return term;
+  }
 
-export function scrapeData(start, end) {
-  return (dispatch, getState) => {
-    /*
-    const { auth } = getState();
-    $.ajax({
-      url: '../utils/collect.py',
-      data: {start: start, end: end, token: auth.token},
-      dataType: 'json'
-    }).done(function(response) {
-      dispatch({
-        type: ActionTypes.SCRAPE_COMPLETED,
-        data: response
-      });
-    });*/
-    // Testing async for now
-    const { auth } = getState();
-    setTimeout(() => {
-      dispatch({
-        type: ActionTypes.SCRAPE_COMPLETED
-      });
-    }, 5000);
+  scrapeData(start, end) {
+    return (dispatch) => {
+      /*
+      const { auth } = getState();
+      $.ajax({
+        url: '../utils/collect.py',
+        data: {start: start, end: end, token: auth.token},
+        dataType: 'json'
+      }).done(function(response) {
+        dispatch({
+          type: ActionTypes.SCRAPE_COMPLETED,
+          data: response
+        });
+      });*/
+      // Testing async for now
+      const state = FSStore.getState();
+      setTimeout(() => {
+        dispatch(false);
+      }, 5000);
 
+    }
+  }
+
+  startScraping(start, end) {
+    scrapeData(start, end);
+    return true;
   }
 }
 
-export function startScraping(start, end) {
-  scrapeData(start, end);
-  return {
-    type: ActionTypes.SCRAPE_STARTED
-  };
-}
+export default alt.createActions(FSActions);
