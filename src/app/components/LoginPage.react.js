@@ -1,12 +1,22 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
+import FSSTore from '../stores/FSSTore';
 import LoginButton from './LoginButton.react';
 import Scraper from './Scraper.react';
 
 export default class LoginPage extends Component {
-  static propTypes = {
-    actions: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired
-  };
+
+  constructor(props, context) {
+    super(props, context);
+    this.state = {auth: FSSTore.getState()};
+  }
+
+  componentDidMount() {
+    FSSTore.listen(this._onChange);
+  }
+
+  componentWillUnmount() {
+    FSSTore.unlisten(this._onChange);
+  }
 
   render() {
     return (
@@ -19,21 +29,23 @@ export default class LoginPage extends Component {
 
   // Renders the Login component only if not already logged in
   renderLogin() {
-    const { auth, actions } = this.props;
-    if (!auth.token) {
+    if (!this.state.auth.token) {
       return (
-        <LoginButton setToken={setToken} />
+        <LoginButton />
       );
     }
   }
 
   // Renders the scraper dialog only if you've authenticated
   renderScraper() {
-    const { auth, actions } = this.props;
-    if (auth.token) {
+    if (this.state.auth.token) {
       return (
-        <Scraper auth={auth} actions={actions} />
+        <Scraper auth={this.state.auth} />
       );
     }
+  }
+
+  _onChange() {
+    this.setState({auth: FSSTore.getState()});
   }
 }
