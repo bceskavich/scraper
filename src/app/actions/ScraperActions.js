@@ -1,14 +1,18 @@
-import * as $ from 'jQuery';
-import alt from '../alt';
-import FSStore from '../stores/FSStore';
+import alt from '../alt'
+import ScraperStore from '../stores/ScraperStore'
 
-class FSActions {
+class ScraperActions {
+
   setToken(token) {
-    return token;
+    this.dispatch(token);
   }
 
   setTerm(term) {
-    return term;
+    this.dispatch(term);
+  }
+
+  isScraping(status) {
+    this.dispatch(status);
   }
 
   scrapeData(start, end) {
@@ -26,18 +30,18 @@ class FSActions {
         });
       });*/
       // Testing async for now
-      const state = FSStore.getState();
+      const state = ScraperStore.getState();
       setTimeout(() => {
-        dispatch(false);
+        this.isScraping(false);
       }, 5000);
 
     }
   }
 
   startScraping(start, end) {
-    scrapeData(start, end);
-    return true;
+    this.actions.isScraping(true);
+    this.actions.scrapeData(start, end);
   }
 }
 
-export default alt.createActions(FSActions);
+export default alt.createActions(ScraperActions);

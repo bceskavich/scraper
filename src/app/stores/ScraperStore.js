@@ -1,12 +1,13 @@
 import alt from '../alt';
-import FSActions from '../actions/FSActions';
+import ScraperActions from '../actions/ScraperActions';
 
-class FSStore {
+class ScraperStore {
   constructor() {
+
     this.bindListeners({
-      setToken: FSActions.setToken,
-      setTerm: FSActions.setTerm,
-      isScraping: [FSActions.scrapeData, FSActions.startScraping]
+      onSetToken: ScraperActions.SET_TOKEN,
+      onSetTerm: ScraperActions.SET_TERM,
+      onIsScraping: ScraperActions.IS_SCRAPING
     });
 
     this.state = {
@@ -16,23 +17,23 @@ class FSStore {
     };
   }
 
-  setToken(token) {
+  onSetToken(token) {
     var currentState = this.getState();
     currentState.token = token;
     this.setState(currentState);
   }
 
-  setTerm(term) {
+  onSetTerm(term) {
     var currentState = this.getState();
     currentState.term = term;
     this.setState(currentState);
   }
 
-  isScraping(status) {
+  onIsScraping(status) {
     var currentState = this.getState();
     currentState.scraping = status;
     this.setState(currentState);
   }
 }
 
-export default alt.createStore(FSStore, 'FSStore');
+export default alt.createStore(ScraperStore, 'ScraperStore');

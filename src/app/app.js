@@ -1,4 +1,4 @@
-import LoginPage from './components/LoginPage.react';
+import LoginPage from './components/LoginPage.jsx';
 import React from 'react';
 
 React.render(

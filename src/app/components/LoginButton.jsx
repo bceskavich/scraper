@@ -1,10 +1,9 @@
-import $ from 'jQuery';
-import { Component } from 'react';
-import FSActions from '../actions/FSActions';
+import React, { Component } from 'react';
+import ScraperActions from '../actions/ScraperActions';
 
 const loginParams = {
-  clientId: 'TODO',
-  redirectUri: 'http://localhost:3000',
+  clientId: '419300968276124',
+  redirectUri: 'http://localhost:8888',
   responseType: 'token',
 }
 const loginPath = 'https://www.facebook.com/dialog/oauth?client_id=' +
