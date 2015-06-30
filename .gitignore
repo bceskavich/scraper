@@ -7,8 +7,9 @@ pids
 *.pid
 *.seed
 
-# Dependency directory
+# Dependency directories
 node_modules
+env
 
 # Build file
 src/build/js/bundle.js
