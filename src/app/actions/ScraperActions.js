@@ -3,16 +3,12 @@ import ScraperStore from '../stores/ScraperStore'
 
 class ScraperActions {
 
-  setToken(token) {
-    this.dispatch(token);
-  }
-
-  setTerm(term) {
-    this.dispatch(term);
-  }
-
-  isScraping(status) {
-    this.dispatch(status);
+  constructor() {
+    this.generateActions(
+      'setToken',
+      'setTerm',
+      'isScraping'
+    );
   }
 
   scrapeData() {
