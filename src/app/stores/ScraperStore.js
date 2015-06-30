@@ -18,19 +18,19 @@ class ScraperStore {
   }
 
   onSetToken(token) {
-    var currentState = this.getState();
+    var currentState = this.state;
     currentState.token = token;
     this.setState(currentState);
   }
 
   onSetTerm(term) {
-    var currentState = this.getState();
+    var currentState = this.state;
     currentState.term = term;
     this.setState(currentState);
   }
 
   onIsScraping(status) {
-    var currentState = this.getState();
+    var currentState = this.state;
     currentState.scraping = status;
     this.setState(currentState);
   }

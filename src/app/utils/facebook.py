@@ -20,7 +20,7 @@ class Facebook(object):
         :param until: YYYY-MM-DD formatted date as an upper-bound (optional)
         :returns: resp
         """
-        url = self.base_url + '/' + id + '/about'
+        url = self.base_url + '/' + id + '/feed'
 
         params = {'limit': limit, 'access_token': self.access_token}
         if since is not None:
@@ -68,11 +68,11 @@ class FacebookError(Exception):
 
 
 if __name__ == '__main__':
-    TOKEN = 'CAAF9Wh1EoJwBALRxcPFfKrfFa7hc3rma7gxZAJcdUZCEbHZAGozRTcpePHkORqlsIj0TG9CkYM2I4vlCPw71603pdK7TZCR4kw7qDKpW6ZCwBqzDTVI3c8qhq9oUdU3OXmhKhCpsZCpEVPzZB4SREwW8FdIJmy2NSPelc8qIoW7xRE5ckM7ZCZAff0e2zbGN1wWtEWaV167r8ZCsOF0lgRsM3g'
+    TOKEN = 'CAAF9Wh1EoJwBAJCcqUZC3xcZAr2jRmqsjhVUaVS4gFkSoJZB09La0O2uFOLGOUyZC66arKT4xIZCq5s1lADS66ld2MmGABY7oSAaNK6s74jJTnP6ijtfDAJC7pGWZBrc1SOSlv0begFBddKW2gRFyZA2NYT8Y10qeZAKUT8DKMVKdi5fGkanc92ZA7eImdnOCYQKtrm5orbVbLFNohGpTwGlu'
 
     try:
         fb = Facebook(TOKEN)
-        data = fb.get_object_feed('378775635466826')
+        data = fb.get_object_feed('146333882181893')
         print json.dumps(data, indent=1)
     except FacebookError as e:
         print e[0]

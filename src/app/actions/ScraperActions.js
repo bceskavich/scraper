@@ -15,32 +15,29 @@ class ScraperActions {
     this.dispatch(status);
   }
 
-  scrapeData(start, end) {
-    return (dispatch) => {
-      /*
-      const { auth } = getState();
-      $.ajax({
-        url: '../utils/collect.py',
-        data: {start: start, end: end, token: auth.token},
-        dataType: 'json'
-      }).done(function(response) {
-        dispatch({
-          type: ActionTypes.SCRAPE_COMPLETED,
-          data: response
-        });
-      });*/
-      // Testing async for now
-      const state = ScraperStore.getState();
-      setTimeout(() => {
-        this.isScraping(false);
-      }, 5000);
-
-    }
+  scrapeData() {
+    /*
+    const { auth } = getState();
+    $.ajax({
+      url: '../utils/collect.py',
+      data: {start: start, end: end, token: auth.token},
+      dataType: 'json'
+    }).done(function(response) {
+      dispatch({
+        type: ActionTypes.SCRAPE_COMPLETED,
+        data: response
+      });
+    });*/
+    // Testing async for now
+    console.log('Starting timeout.');
+    setTimeout(() => {
+      this.actions.isScraping(false);
+    }, 1000)
   }
 
-  startScraping(start, end) {
+  startScraping() {
     this.actions.isScraping(true);
-    this.actions.scrapeData(start, end);
+    this.actions.scrapeData();
   }
 }
 
