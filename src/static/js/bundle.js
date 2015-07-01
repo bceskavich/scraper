@@ -48,15 +48,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _componentsLoginPageJsx = __webpack_require__(1);
+	var _componentsScraperApp = __webpack_require__(1);
 
-	var _componentsLoginPageJsx2 = _interopRequireDefault(_componentsLoginPageJsx);
+	var _componentsScraperApp2 = _interopRequireDefault(_componentsScraperApp);
 
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	_react2['default'].render(_react2['default'].createElement(_componentsLoginPageJsx2['default'], null), document.getElementById('facescrape'));
+	_react2['default'].render(_react2['default'].createElement(_componentsScraperApp2['default'], null), document.getElementById('facescrape'));
 
 /***/ },
 /* 1 */
@@ -90,22 +90,23 @@
 
 	var _actionsScraperActions2 = _interopRequireDefault(_actionsScraperActions);
 
-	var _LoginButtonJsx = __webpack_require__(175);
+	var _LoginButton = __webpack_require__(175);
 
-	var _LoginButtonJsx2 = _interopRequireDefault(_LoginButtonJsx);
+	var _LoginButton2 = _interopRequireDefault(_LoginButton);
 
-	var LoginPage = (function (_Component) {
-	  function LoginPage(props, context) {
-	    _classCallCheck(this, LoginPage);
+	var ScraperApp = (function (_Component) {
+	  function ScraperApp(props, context) {
+	    _classCallCheck(this, ScraperApp);
 
-	    _get(Object.getPrototypeOf(LoginPage.prototype), 'constructor', this).call(this, props, context);
+	    _get(Object.getPrototypeOf(ScraperApp.prototype), 'constructor', this).call(this, props, context);
 	    this.state = _storesScraperStore2['default'].getState().state;
+
 	    this._onChange = this._onChange.bind(this);
 	  }
 
-	  _inherits(LoginPage, _Component);
+	  _inherits(ScraperApp, _Component);
 
-	  _createClass(LoginPage, [{
+	  _createClass(ScraperApp, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      _storesScraperStore2['default'].listen(this._onChange);
@@ -122,7 +123,7 @@
 	      return _react2['default'].createElement(
 	        'div',
 	        null,
-	        _react2['default'].createElement(_LoginButtonJsx2['default'], null),
+	        _react2['default'].createElement(_LoginButton2['default'], null),
 	        _react2['default'].createElement('br', null),
 	        this.renderToken()
 	      );
@@ -153,10 +154,10 @@
 	    }
 	  }]);
 
-	  return LoginPage;
+	  return ScraperApp;
 	})(_react.Component);
 
-	exports['default'] = LoginPage;
+	exports['default'] = ScraperApp;
 	;
 	module.exports = exports['default'];
 
@@ -20621,8 +20622,7 @@
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var alt = new _alt2['default']();
-	exports['default'] = alt;
+	exports['default'] = new _alt2['default']();
 	module.exports = exports['default'];
 
 /***/ },
@@ -22547,24 +22547,11 @@
 	var ScraperActions = (function () {
 	  function ScraperActions() {
 	    _classCallCheck(this, ScraperActions);
+
+	    this.generateActions('setToken', 'setTerm', 'isScraping');
 	  }
 
 	  _createClass(ScraperActions, [{
-	    key: 'setToken',
-	    value: function setToken(token) {
-	      this.dispatch(token);
-	    }
-	  }, {
-	    key: 'setTerm',
-	    value: function setTerm(term) {
-	      this.dispatch(term);
-	    }
-	  }, {
-	    key: 'isScraping',
-	    value: function isScraping(status) {
-	      this.dispatch(status);
-	    }
-	  }, {
 	    key: 'scrapeData',
 	    value: function scrapeData() {
 	      var _this = this;

@@ -1,7 +1,7 @@
-import LoginPage from './components/LoginPage.jsx';
+import ScraperApp from './components/ScraperApp';
 import React from 'react';
 
 React.render(
-  <LoginPage />,
+  <ScraperApp />,
   document.getElementById('facescrape')
 );

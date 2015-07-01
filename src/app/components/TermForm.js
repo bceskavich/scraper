@@ -4,7 +4,7 @@ import ScraperStore from '../stores/ScraperStore';
 
 const ENTER_KEY_CODE = 13;
 
-export default class Scraper extends Component {
+export default class TermForm extends Component {
 
   constructor(props, context) {
     super(props, context);

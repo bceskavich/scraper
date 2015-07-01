@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ScraperStore from '../stores/ScraperStore';
 import ScraperActions from '../actions/ScraperActions';
-import LoginButton from './LoginButton.jsx';
+import LoginButton from './LoginButton';
 
-export default class LoginPage extends Component {
+export default class ScraperApp extends Component {
 
   constructor(props, context) {
     super(props, context);
