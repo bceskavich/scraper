@@ -12,15 +12,15 @@ def scrape():
         token = request.args.get('token', None)
         fb_id = request.args.get('id', None)
 
-        if token is None or fb_id is None:
+        if token is not None or fb_id is not None:
+            # TODO - actually call the scraper function
+            pass
+        else:
             resp = {
                 'data': None,
                 'status': 0,
                 'message': 'Invalid parameters. Please provide a token and id.'
             }
-        else:
-            # TODO - actually call the scraper function
-            resp = {'todo': 'TODO'}
 
     return jsonify(resp)
 
