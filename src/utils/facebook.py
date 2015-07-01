@@ -11,16 +11,17 @@ class Facebook(object):
         self.access_token = token
         self.base_url = 'https://graph.facebook.com/v2.3'
 
-    def get_object_feed(self, id, limit=250, since=None, until=None):
+    def get_object_feed(self, endpoint, limit=250, since=None, until=None):
         """
         Public method to grab feed from an object
 
-        :param id: str FB page_id (required)
+        :param endpoint: str FB endpoint
         :param since: YYYY-MM-DD formatted date as a lower-boundary limit (optional)
         :param until: YYYY-MM-DD formatted date as an upper-bound (optional)
         :returns: resp
         """
-        url = self.base_url + '/' + id + '/feed'
+        endpoint_id = self.get_object_id(endpoint)
+        url = self.base_url + '/' + endpoint_id + '/feed'
 
         params = {'limit': limit, 'access_token': self.access_token}
         if since is not None:
@@ -29,7 +30,6 @@ class Facebook(object):
             params['until'] = until
 
         resp = requests.get(url, params=params)
-        print resp
         resp = json.loads(resp.content)
 
         if 'error' in resp.keys():
@@ -55,8 +55,20 @@ class Facebook(object):
         id = resp['id']
         return id
 
+    def is_valid(self, object_name):
+        """
+        Queries the Facebook API to see if the input is valid.
+        Currently Supported: Personal Account, Public Pages, Public Groups (w/ ID)
+        """
+        try:
+            resp = self.get_object_id(object_name)
+            return True
+        except FacebookError as e:
+            return False
+
 
 class FacebookError(Exception):
+
     def __init__(self, resp):
         self.result = resp
         self.type = self.result['error']['code']
@@ -68,11 +80,12 @@ class FacebookError(Exception):
 
 
 if __name__ == '__main__':
-    TOKEN = 'CAAF9Wh1EoJwBAJCcqUZC3xcZAr2jRmqsjhVUaVS4gFkSoJZB09La0O2uFOLGOUyZC66arKT4xIZCq5s1lADS66ld2MmGABY7oSAaNK6s74jJTnP6ijtfDAJC7pGWZBrc1SOSlv0begFBddKW2gRFyZA2NYT8Y10qeZAKUT8DKMVKdi5fGkanc92ZA7eImdnOCYQKtrm5orbVbLFNohGpTwGlu'
+    TOKEN = 'CAACEdEose0cBAJWcQ3K6EImJ4XvonJfBAqZBdcEZABS4znzgX2ihV61yAfj2hBbJosBGBBpX0WUPsWZAomINDiqREmOcZAPG9ZBLDfLSTaN8ITZABxsaR0EF7vDnavz4Gxq4iFlrxUZCJeHDCgOnZAI5B8vTHGG8kiJxSecfEKnBoPtaBoNohmjOZB9IZCZA5nsQ9lI209r4WehHUQG2qD5QaPZC'
+    ENDPOINT = 'tedcruzpage'
+    FB = Facebook(TOKEN)
 
-    try:
-        fb = Facebook(TOKEN)
-        data = fb.get_object_feed('146333882181893')
+    if FB.is_valid(ENDPOINT):
+        data = FB.get_object_feed(ENDPOINT)
         print json.dumps(data, indent=1)
-    except FacebookError as e:
-        print e[0]
+    else:
+        print 'Invalid endpoint!'
