@@ -1,16 +1,6 @@
 import requests
 import json
-
-from app import app
 from facebook import Facebook, FacebookError
-
-class Collector(object):
-
-    def __init__(self, token, username):
-        self.token = token
-        self.username = username
-
-        self.outdir =
 
 def main(group_id, token):
     print 'Starting scrape.'
