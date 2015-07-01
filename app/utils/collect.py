@@ -7,10 +7,11 @@ from facebook import Facebook, FacebookError
 
 class Scraper(object):
 
-    def __init__(self, token, username, term):
+    def __init__(self, token, username, term, term_id):
         self.token = token
         self.username = username
         self.term = term
+        self.term_id = term_id
 
         self.outdir = app.config['BASEDIR'] + '/data/' + self.username + '/'
         self.outfile = self.outdir + self.term + '-out.json'
@@ -19,29 +20,22 @@ class Scraper(object):
             os.makedirs(self.outdir)
 
     def collect(self):
-        fb = Facebook(self.token)
-        if not fb.is_valid(self.term):
-            resp = {
-                'data': None,
-                'status': 402,
-                'message': 'Invalid Facebook term. Please try again.'
-            }
-        else:
-            term_id = fb.get_object_id(self.term)
-            with open(self.outfile, 'a') as outfile_open:
-                request_error_count, parsing_error_count = self.run_search(fb, term_id, outfile_open)
+        with open(self.outfile, 'a') as outfile_open:
+            request_error_count, parsing_error_count = self.run_search(outfile_open)
 
-            resp = {
-                'data': None,
-                'status': 201,
-                'message': 'Scraping completed.',
-                'request_errors': request_error_count,
-                'parsing_errors': parsing_error_count
-            }
+        resp = {
+            'data': None,
+            'status': 201,
+            'message': 'Scraping completed.',
+            'request_errors': request_error_count,
+            'parsing_errors': parsing_error_count
+        }
 
         return resp
 
-    def run_search(self, fb, term_id, outfile_open):
+    def run_search(self, outfile_open):
+        fb = Facebook(self.token)
+
         paging_url = 'none'
         page = 1
         request_error_count = 0
@@ -55,7 +49,7 @@ class Scraper(object):
                     resp = requests.get(paging_url)
                     resp = json.loads(resp.content)
                 else:
-                    resp = fb.get_object_feed(term_id)
+                    resp = fb.get_object_feed(self.term_id)
 
                 if not resp['data']:
                     paging_url = None
