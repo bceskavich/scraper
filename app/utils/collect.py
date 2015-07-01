@@ -2,7 +2,7 @@ import requests
 import json
 import os
 
-from app import app
+# from app import app
 from facebook import Facebook, FacebookError
 
 class Scraper(object):
@@ -13,7 +13,8 @@ class Scraper(object):
         self.term = term
         self.term_id = term_id
 
-        self.outdir = app.config['BASEDIR'] + '/data/' + self.username + '/'
+        self.outdir = os.path.abspath(os.path.dirname(__file__)) + '/data/' + self.username + '/'
+        # self.outdir = app.config['BASEDIR'] + '/data/' + self.username + '/'
         self.outfile = self.outdir + self.term + '-out.json'
 
         if not os.path.exists(self.outdir):
@@ -135,9 +136,12 @@ class Scraper(object):
 
 if __name__ == '__main__':
 
-    TOKEN = 'CAACEdEose0cBAM9k9SHzgMakZARVhwAtQ6SH5lQUA0Bo1TmQWLPDRr1EuEOz916ZBmFbwsXVi7lZBFfKRT1mEZCxkj2g0YeGS3YXycDxcWg3pKXmtFMZCJUwGI3ZAJCkHrInaLAZAZBzop9zQO605fZBZBrhTnmGMIlj1tqSdpCGqH0xDrLEHVx5EMr53bML45eiYgofANUQigtGI14jrXQoZCJYZBmhbbxdgkkZD'
-    TERM = 'tedcruzpage'
+    token = 'CAACEdEose0cBAM9k9SHzgMakZARVhwAtQ6SH5lQUA0Bo1TmQWLPDRr1EuEOz916ZBmFbwsXVi7lZBFfKRT1mEZCxkj2g0YeGS3YXycDxcWg3pKXmtFMZCJUwGI3ZAJCkHrInaLAZAZBzop9zQO605fZBZBrhTnmGMIlj1tqSdpCGqH0xDrLEHVx5EMr53bML45eiYgofANUQigtGI14jrXQoZCJYZBmhbbxdgkkZD'
+    term = 'tedcruzpage'
 
-    c = Scraper(token, 'ceskavich', TERM)
+    fb = Facebook(token)
+    term_id = fb.get_object_id(term)
+
+    c = Scraper(token, 'ceskavich', term, term_id)
     resp = c.collect()
     print json.dumps(resp, indent=1)
