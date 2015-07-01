@@ -18,7 +18,7 @@ def scrape():
         else:
             resp = {
                 'data': None,
-                'status': 0,
+                'status': 401,
                 'message': 'Invalid parameters. Please provide a token and id.'
             }
 
