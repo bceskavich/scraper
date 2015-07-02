@@ -14,7 +14,8 @@
     "flux": "^2.0.3",
     "react": "^0.13.3",
     "alt": "^0.16.10",
-    "express": "^4.13.0"
+    "express": "^4.13.0",
+    "jquery": "^2.1.4"
   },
   "devDependencies": {
     "react-hot-loader": "^1.2.7",

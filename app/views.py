@@ -6,6 +6,11 @@ from app import app
 def index():
     return render_template('index.html')
 
+@app.route('/get_client_id', methods=['GET'])
+def get_client_id():
+    if request.method == 'GET':
+        return jsonify({'client_id': app.config['APP_ID']})
+
 @app.route('/scrape/', methods=['GET'])
 def scrape():
     if request.method == 'GET':
