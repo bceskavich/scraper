@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ScraperActions from '../actions/ScraperActions';
 import ScraperStore from '../stores/ScraperStore';
-import APIUtils from '../utils/APIUtils';
+import * as APIUtils from '../utils/APIUtils';
 
 class LoginButton extends Component {
 
@@ -10,7 +10,7 @@ class LoginButton extends Component {
     this.state = {
       clientId: null,
       active: 'inactive',
-      basePath: ScraperStore.getState().basePath;
+      basePath: ScraperStore.getState().basePath
     };
 
     this._getClientId = this._getClientId.bind(this);
@@ -35,13 +35,14 @@ class LoginButton extends Component {
 
   _updateClientId(response) {
     const clientId = response.client_id;
-    this.setState((previousState, currentProps) =>
+    this.setState(function(previousState, currentProps){
+      const newPath = previousState.basePath + '&clientId=' + clientId;
       return {
         clientId: clientId,
         active: 'active',
-        basePath: previousState.basePath
+        basePath: newPath
       };
-    );
+    });
   }
 }
 

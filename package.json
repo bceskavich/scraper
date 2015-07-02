@@ -2,11 +2,9 @@
   "name": "facescrape",
   "version": "0.1.0",
   "description": "A simple app to scrape data from private Facebook pages.",
-  "main": "src/server.js",
   "scripts": {
     "build": "webpack --progress --colors",
-    "start-dev": "webpack-dev-server --hot --progress --colors",
-    "start": "node ."
+    "start-dev": "webpack-dev-server --hot --progress --colors"
   },
   "author": "Billy Ceskavich",
   "license": "ISC",

@@ -27,7 +27,6 @@ export default class ScraperApp extends Component {
           token={this.state.token}
           userName={this.state.userName}
         />
-        // <TermForm info={this.state} />
       </div>
     );
   }

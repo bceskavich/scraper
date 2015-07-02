@@ -6,10 +6,10 @@ class ScraperStore {
     this.bindActions(ScraperActions);
 
     this.userInfo = {
-      token: null,
-      term: null,
-      termId: null,
-      userName: null,
+      token: "",
+      term: "",
+      termId: "",
+      userName: "",
       scraping: null
     };
 
