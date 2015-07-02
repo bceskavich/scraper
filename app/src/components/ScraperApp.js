@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ScraperStore from '../stores/ScraperStore';
-import ScraperActions from '../actions/ScraperActions';
 import LoginButton from './LoginButton';
+import TermForm from './TermForm';
 
 export default class ScraperApp extends Component {
 
@@ -14,7 +14,6 @@ export default class ScraperApp extends Component {
 
   componentDidMount() {
     ScraperStore.listen(this._onChange);
-    this._checkForToken();
   }
 
   componentWillUnmount() {
@@ -24,30 +23,16 @@ export default class ScraperApp extends Component {
   render() {
     return (
       <div>
-        <LoginButton />
-        <br />
-        {this.renderToken()}
+        <LoginButton
+          token={this.state.token}
+          userName={this.state.userName}
+        />
+        <TermForm info={this.state} />
       </div>
     );
   }
 
-  // Renders the scraper dialog only if you've authenticated
-  renderToken() {
-    if (this.state.token) {
-      return 'Your token: ' + this.state.token
-    }
-  }
-
-  _checkForToken() {
-    const splitPath = location.href.split('&');
-    if (splitPath.length > 1) {
-      var token = splitPath[0].split('access_token=')
-      token = token[token.length-1]
-      ScraperActions.setToken(token);
-    }
-  }
-
   _onChange() {
-    this.setState(ScraperStore.getState().state);
+    this.setState(ScraperStore.getState());
   }
 };
