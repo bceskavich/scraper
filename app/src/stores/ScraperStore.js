@@ -5,29 +5,39 @@ class ScraperStore {
   constructor() {
     this.bindActions(ScraperActions);
 
-    // State Values
-    this.token = null;
-    this.term = null;
-    this.termId = null;
-    this.userName = null;
-    this.scraping = false;
+    this.userInfo = {
+      token: null,
+      term: null,
+      termId: null,
+      userName: null,
+      scraping: null
+    };
+
+    const loginParams = {
+      redirectUri: 'http://localhost:5000',
+      responseType: 'token',
+      scope: 'public_profile,user_groups,user_posts'
+    }
+    this.basePath = 'https://www.facebook.com/dialog/oauth?redirect_uri=' +
+                    loginParams.redirectUri + '&response_type=' +
+                    loginParams.responseType + '&scope=' + loginParams.scope;
   }
 
   onSetUserInfo(payload) {
-    this.token = payload.token;
-    this.userName = payload.userName;
+    this.userInfo.token = payload.token;
+    this.userInfo.userName = payload.userName;
   }
 
   onSetTerm(term) {
-    this.term = term;
+    this.userInfo.term = term;
   }
 
   onSetTermId(termId) {
-    this.termId = termId;
+    this.userInfo.termId = termId;
   }
 
   onIsScraping(status) {
-    this.scraping = status;
+    this.userInfo.scraping = status;
   }
 }
 

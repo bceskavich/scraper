@@ -7,7 +7,7 @@ export default class ScraperApp extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.state = ScraperStore.getState().state;
+    this.state = ScraperStore.getState().userInfo;
 
     this._onChange = this._onChange.bind(this);
   }
@@ -33,6 +33,6 @@ export default class ScraperApp extends Component {
   }
 
   _onChange() {
-    this.setState(ScraperStore.getState());
+    this.setState(ScraperStore.getState().userInfo);
   }
 };
