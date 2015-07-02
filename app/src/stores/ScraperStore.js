@@ -3,36 +3,31 @@ import ScraperActions from '../actions/ScraperActions';
 
 class ScraperStore {
   constructor() {
+    this.bindActions(ScraperActions);
 
-    this.bindListeners({
-      onSetToken: ScraperActions.SET_TOKEN,
-      onSetTerm: ScraperActions.SET_TERM,
-      onIsScraping: ScraperActions.IS_SCRAPING
-    });
-
-    this.state = {
-      token: null,
-      term: null,
-      scraping: false
-    };
+    // State Values
+    this.token = null;
+    this.term = null;
+    this.termId = null;
+    this.userName = null;
+    this.scraping = false;
   }
 
-  onSetToken(token) {
-    var currentState = this.state;
-    currentState.token = token;
-    this.setState(currentState);
+  onSetUserInfo(payload) {
+    this.token = payload.token;
+    this.userName = payload.userName;
   }
 
   onSetTerm(term) {
-    var currentState = this.state;
-    currentState.term = term;
-    this.setState(currentState);
+    this.term = term;
+  }
+
+  onSetTermId(termId) {
+    this.termId = termId;
   }
 
   onIsScraping(status) {
-    var currentState = this.state;
-    currentState.scraping = status;
-    this.setState(currentState);
+    this.scraping = status;
   }
 }
 

@@ -5,8 +5,9 @@ class ScraperActions {
 
   constructor() {
     this.generateActions(
-      'setToken',
+      'setUserInfo',
       'setTerm',
+      'setTermId',
       'isScraping'
     );
   }
